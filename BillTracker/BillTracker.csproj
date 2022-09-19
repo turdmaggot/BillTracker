@@ -12,10 +12,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>BillTracker</ApplicationTitle>
+		<ApplicationTitle>Bill Tracker</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.billtracker</ApplicationId>
+		<ApplicationId>com.reinertupaz.billtracker</ApplicationId>
 		<ApplicationIdGuid>7D5C10A2-6778-427C-ACB6-BF97A8A744C1</ApplicationIdGuid>
 
 		<!-- Versions -->
