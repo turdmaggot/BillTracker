@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Input;
 using BillTracker.Models;
 using BillTracker.Services;
+using Microsoft.Maui;
 using SQLite;
 
 namespace BillTracker.ViewModels
@@ -66,10 +68,10 @@ namespace BillTracker.ViewModels
         public AddBillerViewModel(Biller billerObj)
         {
             _billerId = billerObj.BillerId;
-            _dateAdded = billerObj.DateAdded;
             BillerName = billerObj.BillerName;
             BillerReferenceNo = billerObj.BillerReferenceNo;
             BillerType = billerObj.BillerType;
+            _dateAdded = billerObj.DateAdded;
 
             _sqliteRepo = new SQLiteRepository();
         }
@@ -77,24 +79,48 @@ namespace BillTracker.ViewModels
         #endregion
 
         #region Commands
+
         public ICommand AddBillerCommand => new Command(async () =>
         {
+            // Reconsile ViewModel with actual Model here!
             Biller obj = new Biller
             {
+                BillerId = _billerId,
                 BillerName = BillerName,
                 BillerReferenceNo = BillerReferenceNo,
                 BillerType = BillerType,
-                DateAdded = DateTime.Now,
-                BillerId = _billerId
+                DateAdded = _dateAdded
             };
 
             if (_billerId > 0)
                 await _sqliteRepo.UpdateBiller(obj);
             else
+            {
+                obj.DateAdded = DateTime.Now;
                 await _sqliteRepo.AddBiller(obj);
+            }
 
+            await ShowToast("Biller added!");
+            
             await App.Current.MainPage.Navigation.PopAsync();
         });
+
+        #endregion
+
+        #region Private Methods
+
+        private async Task ShowToast(string message)
+        {
+            // TODO: Move this method in its own helper class after!
+            // This code is placed here just for POC purposes!
+
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            CommunityToolkit.Maui.Core.ToastDuration duration = CommunityToolkit.Maui.Core.ToastDuration.Short;
+            double fontSize = 14;
+
+            var toast = CommunityToolkit.Maui.Alerts.Toast.Make(message, duration, fontSize);
+            await toast.Show(cancellationTokenSource.Token);
+        }
 
         #endregion
     }
