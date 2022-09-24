@@ -64,7 +64,6 @@
 	  <PackageReference Include="CommunityToolkit.Maui" Version="1.3.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="ViewModels\" />
 	  <Folder Include="Helpers\" />
 	</ItemGroup>
 	<ItemGroup>

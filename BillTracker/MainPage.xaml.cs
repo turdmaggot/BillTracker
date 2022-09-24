@@ -1,11 +1,24 @@
-﻿namespace BillTracker;
+﻿using BillTracker.ViewModels;
+
+namespace BillTracker;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
+    private MainPageViewModel _viewModel;
+
+    public MainPage()
 	{
 		InitializeComponent();
-	}
+
+        _viewModel = new MainPageViewModel();
+        this.BindingContext = _viewModel;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        _viewModel.ShowBillers();
+    }
 
     async void OnAddNewBiller(object sender, EventArgs e)
     {

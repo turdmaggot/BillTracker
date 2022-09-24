@@ -6,6 +6,7 @@ namespace BillTracker.ViewModels
     {
         public BaseViewModel()
         {
+            // TODO: Just put some common functionality here later.
         }
     }
 }

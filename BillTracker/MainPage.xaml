@@ -1,17 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BillTracker.MainPage">
+             x:Class="BillTracker.MainPage"
+             xmlns:viewmodels="clr-namespace:BillTracker.ViewModels"
+             xmlns:model="clr-namespace:BillTracker.Models"
+             x:DataType="viewmodels:MainPageViewModel"
+             Title="My Billers">
 
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
-            VerticalOptions="Center">
+            VerticalOptions="Fill">
+            <CollectionView ItemsSource="{Binding Billers}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Biller">
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="1"
+                                   Text="{Binding BillerName}"
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding BillerType}"
+                                   FontAttributes="Italic"
+                                   VerticalOptions="End" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <Button
                 x:Name="btnAddBiller"
-                Text="+ Add New Biller"
+                Text="+ Add a New Biller"
                 Clicked="OnAddNewBiller"
                 HorizontalOptions="Center" />
 
