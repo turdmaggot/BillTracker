@@ -4,7 +4,43 @@
              x:Class="BillTracker.ViewBiller"
              xmlns:viewmodels="clr-namespace:BillTracker.ViewModels"
              x:DataType="viewmodels:ViewBillerViewModel">
-    <VerticalStackLayout>
+    <VerticalStackLayout VerticalOptions="Start" Spacing="25" Padding="10,0,10,0">
+        <VerticalStackLayout>
+            <ScrollView MaximumHeightRequest="600" HorizontalOptions="Start">
+                <CollectionView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="1"
+                                        Text="TODO"
+                                        FontAttributes="Bold" />
+                                <Label Grid.Row="1"
+                                        Grid.Column="1"
+                                        Text="TODO"
+                                        FontAttributes="Italic"
+                                        VerticalOptions="End" />
+                                <!--<Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:MainPageViewModel}},Path=SelectedBillerCommand}"  CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>-->
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout VerticalOptions="Start">
+            <Button Text="+ Add a New Bill"
+                    HorizontalOptions="End"
+                    Command="{Binding AddBillCommand}" />
+        </VerticalStackLayout>
 
     </VerticalStackLayout>
 </ContentPage>
