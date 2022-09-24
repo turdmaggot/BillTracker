@@ -5,6 +5,7 @@ using BillTracker.Models;
 using BillTracker.Services;
 using Microsoft.Maui;
 using SQLite;
+using BillTracker.Helpers;
 
 namespace BillTracker.ViewModels
 {
@@ -50,7 +51,6 @@ namespace BillTracker.ViewModels
                 _billerType = value;
             }
         }
-
 
         private int _billerId;
         private DateTime _dateAdded;
@@ -100,27 +100,9 @@ namespace BillTracker.ViewModels
                 await _sqliteRepo.AddBiller(obj);
             }
 
-            await ShowToast("Biller added!");
-            
+            await ToastUtility.ShowShortToast("Biller added.");
             await App.Current.MainPage.Navigation.PopAsync();
         });
-
-        #endregion
-
-        #region Private Methods
-
-        private async Task ShowToast(string message)
-        {
-            // TODO: Move this method in its own helper class after!
-            // This code is placed here just for POC purposes!
-
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            CommunityToolkit.Maui.Core.ToastDuration duration = CommunityToolkit.Maui.Core.ToastDuration.Short;
-            double fontSize = 14;
-
-            var toast = CommunityToolkit.Maui.Alerts.Toast.Make(message, duration, fontSize);
-            await toast.Show(cancellationTokenSource.Token);
-        }
 
         #endregion
     }

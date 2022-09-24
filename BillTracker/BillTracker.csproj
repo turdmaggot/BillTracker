@@ -53,6 +53,7 @@
 	  <None Remove="Microsoft.Maui.Extensions" />
 	  <None Remove="SQLitePCLRaw.bundle_green" />
 	  <None Remove="CommunityToolkit.Maui" />
+	  <None Remove="Helpers\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
@@ -64,6 +65,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="ViewModels\" />
+	  <Folder Include="Helpers\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="AddBillerPage.xaml">
