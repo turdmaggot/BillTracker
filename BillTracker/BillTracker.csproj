@@ -70,5 +70,8 @@
 	  <MauiXaml Update="AddBillerPage.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
+	  <MauiXaml Update="ViewBiller.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>

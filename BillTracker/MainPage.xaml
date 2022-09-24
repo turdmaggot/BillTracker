@@ -5,7 +5,7 @@
              xmlns:viewmodels="clr-namespace:BillTracker.ViewModels"
              xmlns:model="clr-namespace:BillTracker.Models"
              x:DataType="viewmodels:MainPageViewModel"
-             Title="My Billers">
+             Title="Biller">
     <VerticalStackLayout VerticalOptions="Start" Spacing="25" Padding="10,0,10,0">
         <VerticalStackLayout>
             <ScrollView MaximumHeightRequest="600" HorizontalOptions="Start">
@@ -28,6 +28,9 @@
                                         Text="{Binding BillerType}"
                                         FontAttributes="Italic"
                                         VerticalOptions="End" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:MainPageViewModel}},Path=SelectedBillerCommand}"  CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

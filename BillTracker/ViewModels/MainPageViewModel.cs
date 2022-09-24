@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using BillTracker.Models;
 using BillTracker.Services;
 
@@ -24,6 +25,10 @@ namespace BillTracker.ViewModels
 
         #region Commands
 
+        public ICommand SelectedBillerCommand => new Command<Biller>(async (biller) =>
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new ViewBiller(biller));
+        });
 
         #endregion
 
