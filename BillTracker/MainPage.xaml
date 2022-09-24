@@ -5,7 +5,7 @@
              xmlns:viewmodels="clr-namespace:BillTracker.ViewModels"
              xmlns:model="clr-namespace:BillTracker.Models"
              x:DataType="viewmodels:MainPageViewModel"
-             Title="Biller">
+             Title="My Billers">
     <VerticalStackLayout VerticalOptions="Start" Spacing="25" Padding="10,0,10,0">
         <VerticalStackLayout>
             <ScrollView MaximumHeightRequest="600" HorizontalOptions="Start">
