@@ -5,6 +5,27 @@
              xmlns:viewmodels="clr-namespace:BillTracker.ViewModels"
              x:DataType="viewmodels:ViewBillerViewModel">
     <VerticalStackLayout VerticalOptions="Start" Spacing="25" Padding="10,0,10,0">
+
+        <VerticalStackLayout VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+            <Label Text="Biller Info" FontAttributes="Bold" FontSize="Title"  HorizontalOptions="Center" />
+            <Label Text="Biller:" FontAttributes="Bold" />
+            <Label Text="{Binding Biller.BillerName}" />
+            <Label Text="Account/Reference Number:" FontAttributes="Bold" />
+            <Label Text="{Binding Biller.BillerReferenceNo}" FontAttributes="Italic" />
+            <Label Text="Biller Type:" FontAttributes="Bold" />
+            <Label Text="{Binding Biller.BillerType}" />
+        </VerticalStackLayout>
+        
+        <VerticalStackLayout VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+            <Label Text="Add a New Bill" FontAttributes="Bold" FontSize="Title" HorizontalOptions="Center" />
+            <Label Text="Due Date:" FontAttributes="Bold" />
+            <DatePicker  />
+            <Label Text="Minimum Amount to Pay:" FontAttributes="Bold" />
+            <Entry Placeholder="Minimum Amount" Keyboard="Numeric" />
+            <Label Text="Total Amount:" FontAttributes="Bold" />
+            <Entry Placeholder="Total Amount" Keyboard="Numeric" />
+        </VerticalStackLayout>
+
         <VerticalStackLayout>
             <ScrollView MaximumHeightRequest="600" HorizontalOptions="Start">
                 <CollectionView>
@@ -27,7 +48,7 @@
                                         FontAttributes="Italic"
                                         VerticalOptions="End" />
                                 <!--<Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:MainPageViewModel}},Path=SelectedBillerCommand}"  CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:ViewBillerViewModel}},Path=SelectedBillCommand}"  CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>-->
                             </Grid>
                         </DataTemplate>
