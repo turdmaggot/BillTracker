@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BillTracker.AddBillerPage"
+             xmlns:viewmodels="clr-namespace:BillTracker.ViewModels"
+             x:DataType="viewmodels:AddBillerViewModel"
+             Title="Add a New Biller">
+    <VerticalStackLayout Padding="10,0,10,0" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+        <Entry Text="{Binding BillerName}" Placeholder="Biller Name (.e.g. MERALCO, BDO Credit Card)" />
+        <Entry Text="{Binding BillerReferenceNo}" Placeholder="Account/Reference Number" />
+        <Entry Text="{Binding BillerType}" Placeholder="Type (e.g. Utility, Credit Card)" />
+        <Button x:Name="btnSaveUpdate" Text="Save Biller" Command="{Binding AddBillerCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

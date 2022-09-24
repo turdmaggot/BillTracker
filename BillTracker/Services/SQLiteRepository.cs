@@ -46,6 +46,18 @@ namespace BillTracker.Services
             return await _con.InsertAsync(billerToAdd);
         }
 
+        public async Task<int> UpdateBiller(Biller biller)
+        {
+            await Init();
+            return await _con.UpdateAsync(biller);
+        }
+
+        public async Task<int> AddBiller(Biller biller)
+        {
+            await Init();
+            return await _con.InsertAsync(biller);
+        }
+
         public async Task<List<Biller>> GetAllBillers()
         {
             await Init();

@@ -48,9 +48,24 @@
 	<ItemGroup>
 	  <None Remove="sqlite-net-pcl" />
 	  <None Remove="SQLitePCLRaw.provider.dynamic_cdecl" />
+	  <None Remove="ViewModels\" />
+	  <None Remove="Microsoft.Maui.Dependencies" />
+	  <None Remove="Microsoft.Maui.Extensions" />
+	  <None Remove="SQLitePCLRaw.bundle_green" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 	  <PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.2" />
+	  <PackageReference Include="Microsoft.Maui.Dependencies" Version="6.0.540" />
+	  <PackageReference Include="Microsoft.Maui.Extensions" Version="6.0.540" />
+	  <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.2" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="ViewModels\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="AddBillerPage.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>
