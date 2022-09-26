@@ -54,6 +54,7 @@
 	  <None Remove="SQLitePCLRaw.bundle_green" />
 	  <None Remove="CommunityToolkit.Maui" />
 	  <None Remove="Helpers\" />
+	  <None Remove="Views\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
@@ -65,13 +66,25 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Helpers\" />
+	  <Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <MauiXaml Update="AddBillerPage.xaml">
+	  <MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="Views\AddBillerPage.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
-	  <MauiXaml Update="ViewBiller.xaml">
+	  <MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="Views\MainPage.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
+	  <MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="Views\ViewBiller.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MainPage.xaml.cs">
+	    <DependentUpon>MainPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\ViewBiller.xaml.cs">
+	    <DependentUpon>ViewBiller.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 </Project>
