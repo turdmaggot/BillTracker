@@ -5,13 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:BillTracker.Views"
     Shell.FlyoutBehavior="Flyout">
-    <FlyoutItem Title="My Billers">
+    <FlyoutItem Title="My Billers" Icon="merchant">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate views:MainPage}"
                           Route="MainPage" />
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Add a New Biller">
+    <FlyoutItem Title="Add a New Biller" Icon="add_card">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate views:AddBillerPage}"
                           Route="AddBillerPage" />
