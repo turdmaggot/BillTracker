@@ -1,6 +1,6 @@
 ﻿using BillTracker.ViewModels;
 
-namespace BillTracker;
+namespace BillTracker.Views;
 
 public partial class MainPage : ContentPage
 {
