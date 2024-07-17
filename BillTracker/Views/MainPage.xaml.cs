@@ -6,22 +6,22 @@ public partial class MainPage : ContentPage
 {
     private MainPageViewModel _viewModel;
 
-    public MainPage()
+    public MainPage(MainPageViewModel mainPageViewModel)
 	{
 		InitializeComponent();
 
-        _viewModel = new MainPageViewModel();
-        this.BindingContext = _viewModel;
+        _viewModel = mainPageViewModel;
+        BindingContext = _viewModel;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        _viewModel.ShowBillers();
+        await _viewModel.ShowBillers();
     }
 
-    async void OnAddNewBiller(object sender, EventArgs e)
+    protected override bool OnBackButtonPressed()
     {
-		await Navigation.PushAsync(new AddBillerPage());
+         return true;
     }
 }

@@ -1,108 +1,91 @@
-﻿using System;
-using System.Threading;
-using System.Windows.Input;
-using BillTracker.Models;
+﻿using BillTracker.Models;
 using BillTracker.Services;
-using Microsoft.Maui;
-using SQLite;
 using BillTracker.Helpers;
+using System.ComponentModel;
+using BillTracker.Views;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BillTracker.ViewModels
 {
-    public class AddBillerViewModel : BaseViewModel
+    public partial class AddBillerViewModel : BaseViewModel, INotifyPropertyChanged
     {
         #region Properties
 
-        private string _billerName;
-        public string BillerName
+        private Biller _biller;
+        
+        public Biller Biller
         {
-            get
-            {
-                return _billerName;
+            get 
+            {  
+                if (_biller == null)
+                {
+                    _biller = new Biller();
+                }
+
+                return _biller;
             }
-            set
-            {
-                _billerName = value;
+            set 
+            { 
+                _biller = value; 
+                NotifyPropertyChanged(nameof(Biller));
             }
         }
 
-        private string _billerReferenceNo;
-        public string BillerReferenceNo
+        private void NotifyPropertyChanged(string propertyName)
         {
-            get
+            if (propertyName.Equals(nameof(Biller)))
             {
-                return _billerReferenceNo;
-            }
-            set
-            {
-                _billerReferenceNo = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Biller)));
             }
         }
 
-        private string _billerType;
-        public string BillerType
-        {
-            get
-            {
-                return _billerType;
-            }
-            set
-            {
-                _billerType = value;
-            }
-        }
-
-        private int _billerId;
-        private DateTime _dateAdded;
         private readonly SQLiteRepository _sqliteRepo;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 
         #region Constructor
 
-        public AddBillerViewModel()
+        public AddBillerViewModel(SQLiteRepository sQLiteRepository)
         {
-            _sqliteRepo = new SQLiteRepository();
-        }
-
-        public AddBillerViewModel(Biller billerObj)
-        {
-            _billerId = billerObj.BillerId;
-            BillerName = billerObj.BillerName;
-            BillerReferenceNo = billerObj.BillerReferenceNo;
-            BillerType = billerObj.BillerType;
-            _dateAdded = billerObj.DateAdded;
-
             _sqliteRepo = new SQLiteRepository();
         }
 
         #endregion
 
+        private bool Validate()
+        {
+            bool hasMissingField = string.IsNullOrWhiteSpace(_biller.BillerName)
+            || string.IsNullOrWhiteSpace(_biller.BillerReferenceNo)
+            || string.IsNullOrWhiteSpace(_biller.BillerReferenceNo);
+
+            return !hasMissingField;
+        }
+
         #region Commands
 
-        public ICommand AddBillerCommand => new Command(async () =>
+        [RelayCommand]
+        private async Task AddBillerAsync()
         {
-            // Reconsile ViewModel with actual Model here!
-            Biller obj = new Biller
+            if (Validate())
             {
-                BillerId = _billerId,
-                BillerName = BillerName,
-                BillerReferenceNo = BillerReferenceNo,
-                BillerType = BillerType,
-                DateAdded = _dateAdded
-            };
+                if (Biller.BillerId > 0)
+                    await _sqliteRepo.UpdateBiller(_biller);
+                else
+                {
+                    Biller.DateAdded = DateTime.Now;
+                    await _sqliteRepo.AddBiller(_biller);
+                }
 
-            if (_billerId > 0)
-                await _sqliteRepo.UpdateBiller(obj);
-            else
-            {
-                obj.DateAdded = DateTime.Now;
-                await _sqliteRepo.AddBiller(obj);
+                Biller = new Biller(); // Reset Biller, as this viewmodel is reused.
+
+                await ToastUtility.ShowShortToast("Biller added.");
+                await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
             }
-
-            await ToastUtility.ShowShortToast("Biller added.");
-            await App.Current.MainPage.Navigation.PopAsync();
-        });
+            else
+                await ToastUtility.ShowShortToast("Incomplete fields. Please check your inputs.");
+        }
 
         #endregion
     }

@@ -6,9 +6,9 @@
              x:DataType="viewmodels:AddBillerViewModel"
              Title="Add a New Biller">
     <VerticalStackLayout Padding="10,0,10,0" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
-        <Entry Text="{Binding BillerName}" Placeholder="Biller Name (.e.g. MERALCO, BDO Credit Card)" />
-        <Entry Text="{Binding BillerReferenceNo}" Placeholder="Account/Reference Number" />
-        <Picker SelectedItem="{Binding BillerType}"
+        <Entry Text="{Binding Biller.BillerName}" Placeholder="Biller Name (.e.g. MERALCO, BDO Credit Card)" />
+        <Entry Text="{Binding Biller.BillerReferenceNo}" Placeholder="Account/Reference Number" />
+        <Picker SelectedItem="{Binding Biller.BillerType}"
                 Title="Select a Biller Type">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">

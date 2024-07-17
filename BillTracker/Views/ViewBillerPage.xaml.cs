@@ -3,16 +3,12 @@ using BillTracker.ViewModels;
 
 namespace BillTracker.Views;
 
-public partial class AddBillerPage : ContentPage
+public partial class ViewBillerPage : ContentPage
 {
-	private AddBillerViewModel _viewModel;
-
-	public AddBillerPage(AddBillerViewModel addBillerViewModel)
-	{
+    public ViewBillerPage(ViewBillerViewModel viewBillerViewModel)
+    {
         InitializeComponent();
-
-        _viewModel = addBillerViewModel;
-        this.BindingContext = _viewModel;
+        BindingContext = viewBillerViewModel;
     }
 
     protected override bool OnBackButtonPressed()

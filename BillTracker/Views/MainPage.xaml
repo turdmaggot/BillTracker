@@ -29,7 +29,7 @@
                                         FontAttributes="Italic"
                                         VerticalOptions="End" />
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:MainPageViewModel}},Path=SelectedBillerCommand}"  CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:MainPageViewModel}},Path=SelectBillerCommand}"  CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </DataTemplate>
@@ -41,7 +41,7 @@
         <VerticalStackLayout VerticalOptions="Start">
             <Button x:Name="btnAddBiller"
                     Text="+ Add a New Biller"
-                    Clicked="OnAddNewBiller"
+                    Command="{Binding AddBillerCommand}"
                     HorizontalOptions="End" />
         </VerticalStackLayout>
 

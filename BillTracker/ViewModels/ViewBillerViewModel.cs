@@ -1,20 +1,25 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using BillTracker.Helpers;
 using System.Windows.Input;
 using BillTracker.Models;
 using BillTracker.Services;
+using System.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BillTracker.ViewModels
 {
-    public class ViewBillerViewModel : BaseViewModel
+    public partial class ViewBillerViewModel : BaseViewModel, IQueryAttributable, INotifyPropertyChanged
     {
         #region Properties
 
         private readonly SQLiteRepository _sqliteRepo;
+        
         public ObservableCollection<Bill> Bills { get; set; } = new ObservableCollection<Bill>();
 
         private Biller _biller;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public Biller Biller
         {
             get
@@ -27,31 +32,43 @@ namespace BillTracker.ViewModels
             }
         }
 
+        public string Title
+        {
+            get
+            {
+                if (_biller != null)
+                {
+                    return $"Biller - {Biller.BillerName}";
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
         #endregion
 
         #region Constructor
 
-        public ViewBillerViewModel(Biller biller)
+        public ViewBillerViewModel(SQLiteRepository sQLiteRepository)
         {
-            _sqliteRepo = new SQLiteRepository();
-            Biller = biller;
-
-            // TODO: Get Bills from Biller, then put to Bills
+            _sqliteRepo = sQLiteRepository;
         }
 
         #endregion
 
         #region Commands
 
-        public ICommand AddBillCommand => new Command(async () =>
+        [RelayCommand]
+        private async Task AddBillAsync()
         {
             // TODO: Add logic to add Bill
 
-
             await ToastUtility.ShowShortToast("Bill added.");
-        });
+        }
 
-        public ICommand SelectedBillCommand => new Command<Bill>(async (bill) =>
+        private async Task SelectedBillAsync()
         {
             string res = await App.Current.MainPage.DisplayActionSheet("Operation", "Cancel", null, "Update", "Delete");
 
@@ -69,7 +86,26 @@ namespace BillTracker.ViewModels
                     //}
                     break;
             }
-        });
+        }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            _biller = query["Biller"] as Biller;
+            OnPropertyChanged(nameof(Biller));
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (propertyName.Equals(nameof(Biller), StringComparison.OrdinalIgnoreCase))
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Biller)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Title)));
+            }
+        }
 
         #endregion
     }

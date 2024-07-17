@@ -3,10 +3,11 @@ using System.Windows.Input;
 using BillTracker.Models;
 using BillTracker.Services;
 using BillTracker.Views;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BillTracker.ViewModels
 {
-    internal class MainPageViewModel : BaseViewModel
+    public partial class MainPageViewModel : BaseViewModel
     {
         #region Properties
 
@@ -26,10 +27,22 @@ namespace BillTracker.ViewModels
 
         #region Commands
 
-        public ICommand SelectedBillerCommand => new Command<Biller>(async (biller) =>
+        [RelayCommand]
+        private async Task SelectBillerAsync(Biller biller)
         {
-            await App.Current.MainPage.Navigation.PushAsync(new ViewBiller(biller));
-        });
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "Biller", biller }
+            };
+            
+            await Shell.Current.GoToAsync($"//{nameof(ViewBillerPage)}", navigationParameter );
+        }
+
+        [RelayCommand]
+        private async Task AddBillerAsync()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(AddBillerPage)}");
+        }
 
         #endregion
 

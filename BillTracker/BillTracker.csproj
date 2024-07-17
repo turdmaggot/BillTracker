@@ -59,6 +59,7 @@
 	  <None Remove="Microsoft.Maui.Extensions" />
 	  <None Remove="SQLitePCLRaw.bundle_green" />
 	  <None Remove="CommunityToolkit.Maui" />
+      <None Remove="CommunityToolkit.Mvvm" />
 	  <None Remove="Helpers\" />
 	  <None Remove="Views\" />
 	  <None Remove="AppActions.Icons.Maui" />
@@ -72,6 +73,7 @@
 	  <PackageReference Include="Microsoft.Maui.Extensions" Version="6.0.553" />
 	  <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.7" />
 	  <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 	  <PackageReference Include="AppActions.Icons.Maui" Version="1.0.0" />
 	</ItemGroup>
 	<ItemGroup>
