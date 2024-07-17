@@ -21,15 +21,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			})
-            .UseMauiCommunityToolkit()
-			.ConfigureEssentials(essentials =>
-            {
-				essentials
-					.UseAppActionIcons()
-					.AddAppAction("home_sc", "Home", icon: AppActionIcon.Home)
-					.OnAppAction(App.HandleAppActions)
-					.AddAppAction("add_biller", "Add a Biller", icon: AppActionIcon.Contact);
-            });
+            .UseMauiCommunityToolkit();
 
         return builder.Build();
 	}

@@ -10,4 +10,9 @@ public partial class ViewBillerPage : ContentPage
         InitializeComponent();
         BindingContext = viewBillerViewModel;
     }
+
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
+    }
 }

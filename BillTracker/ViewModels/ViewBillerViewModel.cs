@@ -13,6 +13,7 @@ namespace BillTracker.ViewModels
         #region Properties
 
         private readonly SQLiteRepository _sqliteRepo;
+        
         public ObservableCollection<Bill> Bills { get; set; } = new ObservableCollection<Bill>();
 
         private Biller _biller;

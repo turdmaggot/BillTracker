@@ -14,4 +14,9 @@ public partial class AddBillerPage : ContentPage
         _viewModel = addBillerViewModel;
         this.BindingContext = _viewModel;
     }
+
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
+    }
 }

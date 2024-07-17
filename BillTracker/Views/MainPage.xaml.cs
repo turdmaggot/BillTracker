@@ -24,4 +24,9 @@ public partial class MainPage : ContentPage
     {
         await Shell.Current.GoToAsync($"//{nameof(AddBillerPage)}");
     }
+
+    protected override bool OnBackButtonPressed()
+    {
+         return true;
+    }
 }
