@@ -39,9 +39,8 @@ public static class MauiProgram
     {
         mauiAppBuilder.Services.AddSingleton<MainPageViewModel>();
 		mauiAppBuilder.Services.AddSingleton<ViewBillerViewModel>();
-		mauiAppBuilder.Services.AddSingleton<AddBillerViewModel>();
-
-
+		mauiAppBuilder.Services.AddTransient<AddBillerViewModel>();
+        
         // More view-models registered here.
 
         return mauiAppBuilder;        
@@ -51,7 +50,7 @@ public static class MauiProgram
     {
         mauiAppBuilder.Services.AddSingleton<MainPage>();
 		mauiAppBuilder.Services.AddSingleton<ViewBillerPage>();
-		mauiAppBuilder.Services.AddSingleton<AddBillerPage>();
+		mauiAppBuilder.Services.AddTransient<AddBillerPage>();
 
         // More views registered here.
 

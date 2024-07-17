@@ -17,6 +17,7 @@ public partial class AddBillerPage : ContentPage
 
     protected override bool OnBackButtonPressed()
     {
+        Shell.Current.GoToAsync($"//{nameof(MainPage)}");
         return true;
     }
 }
