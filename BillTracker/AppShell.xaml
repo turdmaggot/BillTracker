@@ -7,14 +7,13 @@
     Shell.FlyoutBehavior="Flyout">
     <FlyoutItem Title="My Billers" Icon="merchant">
         <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:MainPage}"
-                          Route="MainPage" />
+            <ShellContent ContentTemplate="{DataTemplate views:MainPage}" Route="MainPage" />
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Add a New Biller" Icon="add_card">
         <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:AddBillerPage}"
-                          Route="AddBillerPage" />
+            <ShellContent ContentTemplate="{DataTemplate views:AddBillerPage}" Route="AddBillerPage" />
         </Tab>     
     </FlyoutItem>
+    <ShellContent ContentTemplate="{DataTemplate views:ViewBillerPage}" Route="ViewBillerPage" />
 </Shell>

@@ -1,17 +1,17 @@
-﻿using System;
-using System.Threading;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using BillTracker.Models;
 using BillTracker.Services;
-using Microsoft.Maui;
-using SQLite;
 using BillTracker.Helpers;
+using System.ComponentModel;
+using BillTracker.Views;
 
 namespace BillTracker.ViewModels
 {
     public class AddBillerViewModel : BaseViewModel
     {
         #region Properties
+
+        public Biller CurrentBiller { get; private set; }
 
         private string _billerName;
         public string BillerName
@@ -60,19 +60,8 @@ namespace BillTracker.ViewModels
 
         #region Constructor
 
-        public AddBillerViewModel()
+        public AddBillerViewModel(SQLiteRepository sQLiteRepository)
         {
-            _sqliteRepo = new SQLiteRepository();
-        }
-
-        public AddBillerViewModel(Biller billerObj)
-        {
-            _billerId = billerObj.BillerId;
-            BillerName = billerObj.BillerName;
-            BillerReferenceNo = billerObj.BillerReferenceNo;
-            BillerType = billerObj.BillerType;
-            _dateAdded = billerObj.DateAdded;
-
             _sqliteRepo = new SQLiteRepository();
         }
 
@@ -101,7 +90,7 @@ namespace BillTracker.ViewModels
             }
 
             await ToastUtility.ShowShortToast("Biller added.");
-            await App.Current.MainPage.Navigation.PopAsync();
+            await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
         });
 
         #endregion

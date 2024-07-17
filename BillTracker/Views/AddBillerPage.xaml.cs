@@ -7,19 +7,11 @@ public partial class AddBillerPage : ContentPage
 {
 	private AddBillerViewModel _viewModel;
 
-	public AddBillerPage()
-	{
-		InitializeComponent();
-
-		_viewModel = new AddBillerViewModel();
-		this.BindingContext = _viewModel;
-	}
-
-	public AddBillerPage(Biller biller)
+	public AddBillerPage(AddBillerViewModel addBillerViewModel)
 	{
         InitializeComponent();
 
-        _viewModel = new AddBillerViewModel(biller);
+        _viewModel = addBillerViewModel;
         this.BindingContext = _viewModel;
     }
 }

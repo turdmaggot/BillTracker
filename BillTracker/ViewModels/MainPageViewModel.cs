@@ -6,7 +6,7 @@ using BillTracker.Views;
 
 namespace BillTracker.ViewModels
 {
-    internal class MainPageViewModel : BaseViewModel
+    public class MainPageViewModel : BaseViewModel
     {
         #region Properties
 
@@ -28,7 +28,12 @@ namespace BillTracker.ViewModels
 
         public ICommand SelectedBillerCommand => new Command<Biller>(async (biller) =>
         {
-            await App.Current.MainPage.Navigation.PushAsync(new ViewBiller(biller));
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "Biller", biller }
+            };
+            
+            await Shell.Current.GoToAsync($"//{nameof(ViewBillerPage)}", navigationParameter );
         });
 
         #endregion
