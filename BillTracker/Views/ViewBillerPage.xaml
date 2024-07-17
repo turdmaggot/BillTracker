@@ -48,9 +48,9 @@
                                         Text="TODO"
                                         FontAttributes="Italic"
                                         VerticalOptions="End" />
-                                <!--<Grid.GestureRecognizers>
+                                <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:ViewBillerViewModel}},Path=SelectedBillCommand}"  CommandParameter="{Binding .}" />
-                                </Grid.GestureRecognizers>-->
+                                </Grid.GestureRecognizers>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

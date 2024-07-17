@@ -1,13 +1,13 @@
-﻿using System.Windows.Input;
-using BillTracker.Models;
+﻿using BillTracker.Models;
 using BillTracker.Services;
 using BillTracker.Helpers;
 using System.ComponentModel;
 using BillTracker.Views;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BillTracker.ViewModels
 {
-    public class AddBillerViewModel : BaseViewModel, INotifyPropertyChanged
+    public partial class AddBillerViewModel : BaseViewModel, INotifyPropertyChanged
     {
         #region Properties
 
@@ -65,7 +65,8 @@ namespace BillTracker.ViewModels
 
         #region Commands
 
-        public ICommand AddBillerCommand => new Command(async () =>
+        [RelayCommand]
+        private async Task AddBillerAsync()
         {
             if (Validate())
             {
@@ -84,7 +85,7 @@ namespace BillTracker.ViewModels
             }
             else
                 await ToastUtility.ShowShortToast("Incomplete fields. Please check your inputs.");
-        });
+        }
 
         #endregion
     }

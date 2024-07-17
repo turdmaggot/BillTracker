@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using BillTracker.Helpers;
 using System.Windows.Input;
 using BillTracker.Models;
 using BillTracker.Services;
 using System.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BillTracker.ViewModels
 {
-    public class ViewBillerViewModel : BaseViewModel, IQueryAttributable, INotifyPropertyChanged
+    public partial class ViewBillerViewModel : BaseViewModel, IQueryAttributable, INotifyPropertyChanged
     {
         #region Properties
 
@@ -60,15 +60,15 @@ namespace BillTracker.ViewModels
 
         #region Commands
 
-        public ICommand AddBillCommand => new Command(async () =>
+        [RelayCommand]
+        private async Task AddBillAsync()
         {
             // TODO: Add logic to add Bill
 
-
             await ToastUtility.ShowShortToast("Bill added.");
-        });
+        }
 
-        public ICommand SelectedBillCommand => new Command<Bill>(async (bill) =>
+        private async Task SelectedBillAsync()
         {
             string res = await App.Current.MainPage.DisplayActionSheet("Operation", "Cancel", null, "Update", "Delete");
 
@@ -86,7 +86,7 @@ namespace BillTracker.ViewModels
                     //}
                     break;
             }
-        });
+        }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
